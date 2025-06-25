@@ -14,7 +14,7 @@ export const register = async (req, res) => {
       return res.status(409).json({ message: "Username already taken" })
     }
 
-    const newUser = new User({ username, password }) // password will be hashed in model
+    const newUser = new User({ username, password })
     await newUser.save()
 
     res.status(201).json({ message: "User registered successfully" })
