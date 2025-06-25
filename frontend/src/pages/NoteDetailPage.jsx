@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import api from '../lib/axios';
 import toast from 'react-hot-toast';
-import Loader from '../components/Loader';
 import { ArrowLeftIcon, Trash2Icon } from 'lucide-react';
+
+import Loader from '../components/Loader';
+
+import api from '../lib/axios';
 import { getAuthHeader } from "../lib/utils.js"
 
 const NoteDetailPage = () => {

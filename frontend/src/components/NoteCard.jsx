@@ -1,12 +1,11 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
-
 import { PenSquareIcon, Trash2Icon } from "lucide-react"
 
-import { formatDate } from '../lib/utils'
+import toast from 'react-hot-toast'
 
 import api from '../lib/axios'
-import toast from 'react-hot-toast'
+import { formatDate } from '../lib/utils'
+import { getAuthHeader } from "../lib/utils.js"
 
 const NoteCard = ({ note, setNotes }) => {
 
@@ -14,7 +13,7 @@ const NoteCard = ({ note, setNotes }) => {
     e.preventDefault()
     if (!window.confirm("Are you sure you want to delete this note?")) return
     try {
-      await api.delete(`/api/notes/${id}`)
+      await api.delete(`/api/notes/${id}`,{ headers: { Authorization: getAuthHeader() } })
       setNotes((prev) => prev.filter(note => note._id !== id))
       toast.success("Note deleted successfully")
     } catch (error) {

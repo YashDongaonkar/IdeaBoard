@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../lib/axios.js';
 import { toast } from 'react-hot-toast';
 
+import api from '../lib/axios.js';
 import { getAuthHeader } from "../lib/utils.js"
 
-const LoginRegisterPage = () => {
+const AuthPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      // 👇 Save first so getAuthHeader works
+
       localStorage.setItem('authUser', JSON.stringify({ username, password }));
 
       const res = await api.post('/auth/login', null, {
@@ -36,7 +36,7 @@ const LoginRegisterPage = () => {
       });
 
       toast.success('Registration successful!');
-      handleLogin(); // auto-login after registration
+      handleLogin();
     } catch (err) {
       console.error('Register error:', err);
       toast.error(err.response?.data?.message || 'Registration failed');
@@ -85,4 +85,4 @@ const LoginRegisterPage = () => {
   );
 };
 
-export default LoginRegisterPage;
+export default AuthPage;

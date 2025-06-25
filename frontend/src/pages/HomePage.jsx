@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import toast from "react-hot-toast"
+
 import Header from "../components/Header.jsx"
 import NotesNotFound from "../components/NotesNotFound.jsx"
 import NoteGrid from "../components/NoteGrid.jsx"
+
 import api from "../lib/axios.js"
-import toast from "react-hot-toast"
 import {getAuthHeader} from "../lib/utils.js"
 
 const HomePage = () => {
