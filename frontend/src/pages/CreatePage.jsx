@@ -1,8 +1,10 @@
-import React , {useState} from 'react'
+import React, { useState } from 'react'
 import { ArrowLeftIcon } from "lucide-react"
 import toast from 'react-hot-toast'
 import api from '../lib/axios'
-import { useNavigate,Link } from 'react-router'
+import { useNavigate, Link } from 'react-router-dom'
+
+import { getAuthHeader } from "../lib/utils.js"
 
 const CreatePage = () => {
   const [title, setTitle] = useState("")
@@ -13,32 +15,32 @@ const CreatePage = () => {
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-      e.preventDefault()
+    e.preventDefault()
 
-      const titleTrimmed = title.trim()
-      const contentTrimmed = content.trim()
+    const titleTrimmed = title.trim()
+    const contentTrimmed = content.trim()
 
-      if(!titleTrimmed || !contentTrimmed){
-        toast.error("All fields are required")
-        return;
-      }
+    if (!titleTrimmed || !contentTrimmed) {
+      toast.error("All fields are required")
+      return;
+    }
 
-      setLoading(true)
-      try{
-        await api.post(`/notes`,{
-          title:titleTrimmed,
-          content:contentTrimmed
-        })
-        toast.success("Note created successfully")
-        setTitle("")
-        setContent("")
-        navigate("/home")
-      }catch(error){
-        console.log("Error creating note", error)
-        toast.error("Failed to create note")
-      }finally{
-        setLoading(false)
-      }
+    setLoading(true)
+    try {
+      await api.post(`/api/notes`, {
+        title: titleTrimmed,
+        content: contentTrimmed
+      }, { headers: { Authorization: getAuthHeader() } })
+      toast.success("Note created successfully")
+      setTitle("")
+      setContent("")
+      navigate("/home")
+    } catch (error) {
+      console.log("Error creating note", error)
+      toast.error("Failed to create note")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (

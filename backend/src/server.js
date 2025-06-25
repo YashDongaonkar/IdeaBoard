@@ -4,6 +4,8 @@ import dotenv from "dotenv"
 import cors from "cors"
 
 import notesRoutes from "./routes/notesRoute.js"
+import authRoutes from './routes/authRoutes.js'
+
 import { connectDB } from "./config/db.js"
 
 dotenv.config()
@@ -17,6 +19,7 @@ app.use(cors({
     origin:"http://localhost:5173"
 }))
 
+app.use('/auth', authRoutes)
 app.use("/api/notes", notesRoutes)
 
 connectDB().then(

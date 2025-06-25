@@ -4,6 +4,7 @@ import NotesNotFound from "../components/NotesNotFound.jsx"
 import NoteGrid from "../components/NoteGrid.jsx"
 import api from "../lib/axios.js"
 import toast from "react-hot-toast"
+import {getAuthHeader} from "../lib/utils.js"
 
 const HomePage = () => {
 
@@ -14,7 +15,7 @@ const HomePage = () => {
         const fetchNotes = async () => {
             setLoading(true)
             try {
-                const response = await api.get("/notes")
+                const response = await api.get("/api/notes", {headers: { Authorization: getAuthHeader() }})
                 setNotes(response.data)
             } catch (error) {
                 console.log(error)

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../lib/axios.js';
 import { toast } from 'react-hot-toast';
+
+import { getAuthHeader } from "../lib/utils.js"
 
 const LoginRegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -10,54 +12,42 @@ const LoginRegisterPage = () => {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post('/auth/login', null, {
-        auth: {
-          username,
-          password,
-        },
+      // 👇 Save first so getAuthHeader works
+      localStorage.setItem('authUser', JSON.stringify({ username, password }));
+
+      const res = await api.post('/auth/login', null, {
+        headers: { Authorization: getAuthHeader() }
       });
 
-      const { token } = res.data;
-      if (token) {
-        localStorage.setItem('authToken', token);
-        toast.success('Login successful!');
-        navigate('/home');
-      } else {
-        toast.error('Login failed: No token received');
-      }
+      toast.success('Login successful!');
+      navigate('/home');
     } catch (err) {
       console.error('Login error:', err);
       toast.error(err.response?.data?.message || 'Login failed');
     }
   };
 
+
   const handleRegister = async () => {
     try {
-      const res = await axios.post('/auth/register', null, {
-        auth: {
-          username,
-          password,
-        },
+      await api.post('/auth/register', {
+        username,
+        password
       });
 
-      const { token } = res.data;
-      if (token) {
-        localStorage.setItem('authToken', token);
-        toast.success('Registration successful!');
-        navigate('/home');
-      } else {
-        toast.error('Registration failed: No token received');
-      }
+      toast.success('Registration successful!');
+      handleLogin(); // auto-login after registration
     } catch (err) {
       console.error('Register error:', err);
       toast.error(err.response?.data?.message || 'Registration failed');
     }
   };
 
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-purple-200 px-4">
       <div className="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full space-y-6">
-        <h2 className="text-2xl font-bold text-center text-gray-800">Welcome Back</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-800">Welcome</h2>
 
         <div className="space-y-4">
           <input

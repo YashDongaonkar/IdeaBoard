@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Link } from "react-router"
+import { Link } from "react-router-dom"
 
 import { PlusIcon } from 'lucide-react'
 
@@ -17,10 +17,10 @@ const Header = () => {
                         </Link>
                         <button
                             onClick={() => {
-                                localStorage.removeItem('authToken');
+                                localStorage.removeItem('authUser');
                                 window.location.href = '/';
                             }}
-                            className="bg-red-500 text-white px-4 py-2 rounded-xl"
+                            className="btn btn-primary"
                         >
                             Logout
                         </button>

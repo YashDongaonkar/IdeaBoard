@@ -5,3 +5,8 @@ export const formatDate = (date) =>{
         year:"numeric"
     })
 }
+
+export const getAuthHeader = () => {
+  const creds = JSON.parse(localStorage.getItem('authUser') || '{}');
+  return `Basic ${btoa(`${creds.username}:${creds.password}`)}`;
+}

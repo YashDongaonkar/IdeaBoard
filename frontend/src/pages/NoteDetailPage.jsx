@@ -4,6 +4,7 @@ import api from '../lib/axios';
 import toast from 'react-hot-toast';
 import Loader from '../components/Loader';
 import { ArrowLeftIcon, Trash2Icon } from 'lucide-react';
+import { getAuthHeader } from "../lib/utils.js"
 
 const NoteDetailPage = () => {
   const [note, setNote] = useState(null);
@@ -16,7 +17,7 @@ const NoteDetailPage = () => {
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete this note?")) return;
     try {
-      await api.delete(`/notes/${id}`);
+      await api.delete(`/api/notes/${id}`, { headers: { Authorization: getAuthHeader() } });
       toast.success("Note deleted successfully");
       navigate("/home");
     } catch (error) {
@@ -37,7 +38,7 @@ const NoteDetailPage = () => {
     setSaving(true);
 
     try {
-      await api.put(`/notes/${id}`, { title: trimmedTitle, content: trimmedContent });
+      await api.put(`/api/notes/${id}`, { title: trimmedTitle, content: trimmedContent }, { headers: { Authorization: getAuthHeader() } });
       toast.success("Note updated successfully");
       navigate("/home");
     } catch (error) {
@@ -52,7 +53,7 @@ const NoteDetailPage = () => {
     setLoading(true);
     const fetchNote = async () => {
       try {
-        const response = await api.get(`/notes/${id}`);
+        const response = await api.get(`/api/notes/${id}`, { headers: { Authorization: getAuthHeader() } });
         setNote(response.data);
       } catch (error) {
         console.error("Error in fetching the note", error);

@@ -1,6 +1,6 @@
 import React from 'react'
 import { FileX2Icon } from "lucide-react"
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const NotesNotFound = () => {
   return (
