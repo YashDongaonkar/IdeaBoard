@@ -32,7 +32,7 @@ const CreatePage = () => {
         toast.success("Note created successfully")
         setTitle("")
         setContent("")
-        navigate("/")
+        navigate("/home")
       }catch(error){
         console.log("Error creating note", error)
         toast.error("Failed to create note")
@@ -44,7 +44,7 @@ const CreatePage = () => {
   return (
     <div className='min-h-screen bg-base-200'>
       <div className="container mx-auto px-4 py-8">
-        <Link to={"/"} className="btn btn-ghost mb-6">
+        <Link to={"/home"} className="btn btn-ghost mb-6">
           <ArrowLeftIcon className='size-5' />
           Back To Notes
         </Link>
