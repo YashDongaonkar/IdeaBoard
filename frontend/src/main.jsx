@@ -9,7 +9,7 @@ import {Toaster} from "react-hot-toast"
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <App data-theme="retro"/>
+      <App/>
       <Toaster />
     </BrowserRouter>
   </StrictMode>,

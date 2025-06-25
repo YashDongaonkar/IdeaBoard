@@ -12,6 +12,7 @@ export default {
   },
   plugins: [daisyui],
   daisyui:{
-    themes:["light","dark","retro","forest","luxury","autumn","dim"]
+    // themes:["light","dark","retro","forest","luxury","autumn","dim"]
+    themes:["sunset"]
   }
 }
