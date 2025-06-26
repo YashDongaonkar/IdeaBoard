@@ -45,44 +45,46 @@ const AuthPage = () => {
 
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-purple-200 px-4">
-      <div className="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full space-y-6">
-        <h2 className="text-2xl font-bold text-center text-gray-800">Welcome</h2>
+    <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
+      <div className="card bg-base-100 hover:shadow-lg transition-all duration-200 border border-t-4 border-primary w-full max-w-md">
+        <div className="card-body space-y-6">
+          <h2 className="card-title text-base-content justify-center">Welcome</h2>
 
-        <div className="space-y-4">
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
-          />
-        </div>
+          <div className="space-y-4">
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
 
-        <div className="flex justify-between space-x-4">
-          <button
-            onClick={handleLogin}
-            className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 rounded-xl transition-all duration-200"
-          >
-            Login
-          </button>
-          <button
-            onClick={handleRegister}
-            className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 rounded-xl transition-all duration-200"
-          >
-            Register
-          </button>
+          <div className="flex justify-between space-x-4 pt-2">
+            <button
+              onClick={handleLogin}
+              className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2 rounded-xl transition-all duration-200"
+            >
+              Login
+            </button>
+            <button
+              onClick={handleRegister}
+              className="w-full bg-base-300 hover:bg-base-200 text-base-content font-semibold py-2 rounded-xl transition-all duration-200"
+            >
+              Register
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  );
+  )
 };
 
 export default AuthPage;
