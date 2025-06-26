@@ -1,5 +1,5 @@
-import User from '../models/User.js'
-import bcrypt from 'bcrypt'
+import User from '../models/User.js';
+import bcrypt from 'bcrypt';
 
 export const basicAuth = async (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -22,6 +22,9 @@ export const basicAuth = async (req, res, next) => {
     if (!isMatch) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
+
+    req.user = { id: user._id, username: user.username }
+
     next();
   } catch (error) {
     console.error('Auth error:', error);
